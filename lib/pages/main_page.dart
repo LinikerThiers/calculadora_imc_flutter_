@@ -16,8 +16,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String imcStatus = "Aguardando cálculo...";
 
   void _calcularImc() {
-    final peso = double.tryParse(_pesoController.text.trim());
-    final altura = double.tryParse(_alturaController.text.trim());
+    final pesoText = _pesoController.text.trim().replaceAll(',', '.');
+    final alturaText = _alturaController.text.trim().replaceAll(',', '.');
+
+    final peso = double.tryParse(pesoText);
+    final altura = double.tryParse(alturaText);
 
     if (peso != null && altura != null && altura > 0) {
       double alturaEmMetros = altura > 3 ? altura / 100 : altura;
