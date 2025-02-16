@@ -200,7 +200,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: _calcularImc,
+                      onPressed: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        _calcularImc();
+                      },
                       style: ButtonStyle(
                         shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
