@@ -1,17 +1,55 @@
 class ImcModel {
-  final int? id;
-  final String nome;
-  final double peso;
-  final double altura;
+  int _id = 0;
+  String _nome = "";
+  double _peso = 0;
+  double _altura = 0;
+  double _resultado = 0;
+  String _statusImc = "";
 
-  ImcModel({this.id, required this.nome, required this.peso, required this.altura});
+  ImcModel(this._id, this._nome, this._peso, this._altura, this._resultado, this._statusImc);
 
-  double calcularImc() {
-    return peso / (altura * altura);
+  ImcModel.calcular(this._id, this._nome, this._peso, this._altura) {
+    _resultado = _peso / (_altura * _altura);
+    _statusImc = resultadoImc(_resultado);
   }
 
-  String resultadoImc() {
-    double imcResultado = calcularImc();
+  int get id => _id;
+
+  set id(int id) {
+    _id = id;
+  }
+
+  String get nome => _nome;
+
+  set nome(String nome) {
+    _nome = nome;
+  }
+
+  double get peso => _peso;
+
+  set peso(double peso) {
+    _peso = peso;
+  }
+
+  double get altura => _altura;
+
+  set altura(double altura) {
+    _altura = altura;
+  }
+
+  double get resultado => _resultado;
+
+  set resultado(double resultado) {
+    _resultado = resultado;
+  }
+
+  String get statusImc => _statusImc;
+
+  set statusImc(String statusImc) {
+    _statusImc = statusImc;
+  }
+
+  String resultadoImc(double imcResultado) {
     if (imcResultado < 16) {
       return "Magreza grave";
     } else if (imcResultado < 17) {
@@ -31,23 +69,4 @@ class ImcModel {
     }
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'nome': nome,
-      'peso': peso,
-      'altura': altura,
-      'resultado': calcularImc(),
-      'resultadoImc': resultadoImc(),
-    };
-  }
-
-  factory ImcModel.fromMap(Map<String, dynamic> map) {
-    return ImcModel(
-      id: map['id'],
-      nome: map['nome'],
-      peso: map['peso'],
-      altura: map['altura'],
-    );
-  }
 }

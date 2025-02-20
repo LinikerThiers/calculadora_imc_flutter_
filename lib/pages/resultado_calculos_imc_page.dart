@@ -1,4 +1,5 @@
 import 'package:calculadoraimc1/model/imc_model.dart';
+import 'package:calculadoraimc1/repositories/imc_repository.dart';
 import 'package:flutter/material.dart';
 
 class ResultadoCalculosImcPage extends StatefulWidget {
@@ -10,13 +11,28 @@ class ResultadoCalculosImcPage extends StatefulWidget {
 }
 
 class _ResultadoCalculosImcPageState extends State<ResultadoCalculosImcPage> {
-  
+  ImcRepository imcRepository = ImcRepository();
+  var imcs = <ImcModel>[];
+
+  @override
+  void initState() {
+    super.initState();
+    obterImcs();
+  }
+
+  void obterImcs() async {
+    imcs = await imcRepository.obterDados();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(
+            height: 25,
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
@@ -28,44 +44,109 @@ class _ResultadoCalculosImcPageState extends State<ResultadoCalculosImcPage> {
               textAlign: TextAlign.center,
             ),
           ),
-          // Lista de resultados
           Expanded(
             child: ListView.builder(
-              itemCount: 5,
+              itemCount: imcs.length,
               itemBuilder: (BuildContext context, int index) {
-                var resultado = 0;
+                var imc = imcs[index];
 
-                return Dismissible(
-                  key: Key("1"),
-                  onDismissed: (direction) {
-                    setState(() {
-                      
-                    });
-                  },
-                  child: Card(
-                    margin: const EdgeInsets.all(10),
-                    elevation: 3,
-                    child: ListTile(
-                      title: Text("Nome"),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Dismissible(
+                    key: Key(imc.id.toString()),
+                    onDismissed: (direction) {
+                      setState(() {
+                        imcs.removeAt(index);
+                      });
+                      imcRepository.remover(imc.id);
+                    },
+                    background: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        color: Colors.red,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        alignment: Alignment.centerRight,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                    direction: DismissDirection.endToStart,
+                    child: Card(
+                      color: Colors.blueAccent,
+                      margin: const EdgeInsets.all(10),
+                      elevation: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ListTile(
+                          title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Altura: ${1} m"),
-                              Text("Resultado IMC: ${1}"),
+                              Text(
+                                imc.nome,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(
+                                Icons.balance,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
-                          SizedBox(height: 5),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Peso: ${1} kg"),
-                              Text("Peso normal"),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Altura: ${imc.altura.toStringAsFixed(2)} m",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Resultado IMC: ${imc.resultado.toStringAsFixed(2)}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Peso: ${imc.peso.toStringAsFixed(2)} kg",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  Text(
+                                    imc.statusImc,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),

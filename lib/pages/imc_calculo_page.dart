@@ -1,5 +1,5 @@
 import 'package:calculadoraimc1/model/imc_model.dart';
-import 'package:calculadoraimc1/repositories/sqlite/sqlitedatabase.dart';
+import 'package:calculadoraimc1/repositories/imc_repository.dart';
 import 'package:flutter/material.dart';
 
 class ImcCalculoPage extends StatefulWidget {
@@ -10,16 +10,16 @@ class ImcCalculoPage extends StatefulWidget {
 }
 
 class _ImcCalculoPageState extends State<ImcCalculoPage> {
+  ImcRepository imcRepository = ImcRepository();
+  var imcs = <ImcModel>[];
+
   final _nomeController = TextEditingController();
   final _pesoController = TextEditingController();
   final _alturaController = TextEditingController();
   String imcValor = "00.00";
   String imcStatus = "Aguardando cálculo...";
 
-  List<ImcModel> resultados = [];
-
-
-  void _calcularImc() {
+  void _calcularImc() async {
     final pesoText = _pesoController.text.trim().replaceAll(',', '.');
     final alturaText = _alturaController.text.trim().replaceAll(',', '.');
 
@@ -30,17 +30,30 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
     if (peso != null && altura != null && altura > 0) {
       double alturaEmMetros = altura > 3 ? altura / 100 : altura;
 
-      final imc = ImcModel(nome: nome, peso: peso, altura: alturaEmMetros);
+      final imc = ImcModel.calcular(0, nome, peso, alturaEmMetros);
 
       setState(() {
-        imcValor = imc.calcularImc().toStringAsFixed(2);
-        imcStatus = imc.resultadoImc();
-        resultados.add(imc);
+        imcValor = imc.resultado.toStringAsFixed(2);
+        imcStatus = imc.statusImc;
       });
+
+      await imcRepository.salvar(imc);
+
+      if (!mounted) return;
 
       _pesoController.clear();
       _alturaController.clear();
+      _nomeController.clear();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Dados salvos com sucesso!"),
+          backgroundColor: Colors.green,
+        ),
+      );
     } else {
+      if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Digite valores válidos para peso e altura!"),
@@ -56,6 +69,7 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
       imcStatus = "Aguardando cálculo...";
       _pesoController.clear();
       _alturaController.clear();
+      _nomeController.clear();
     });
   }
 
@@ -298,7 +312,7 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
                       ),
                       const SizedBox(height: 13),
                       Text(
-                        imcValor, // Exibe o IMC atual ou 00.00 antes do cálculo
+                        imcValor,
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.w800,
@@ -306,7 +320,7 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
                       ),
                       const SizedBox(height: 13),
                       Text(
-                        imcStatus, // Exibe o status atual ou mensagem padrão
+                        imcStatus,
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
