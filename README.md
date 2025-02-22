@@ -2,8 +2,10 @@
 
 Este projeto é uma calculadora de IMC (Índice de Massa Corporal) desenvolvida em Flutter. Ele permite que os usuários calculem seu IMC com base no peso e altura fornecidos, além de armazenar o histórico de cálculos em um banco de dados SQLite. O projeto é composto por várias páginas, widgets, modelos, repositórios e um banco de dados.
 
-![Image](https://github.com/user-attachments/assets/f835449b-6167-488d-bbf8-e63654bf3471)
-![Image](https://github.com/user-attachments/assets/bafb935e-f474-453f-878c-33b50c02b59f)
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/f835449b-6167-488d-bbf8-e63654bf3471" width="250px" height="auto" style="margin-right: 20px;" />
+    <img src="https://github.com/user-attachments/assets/bafb935e-f474-453f-878c-33b50c02b59f" width="250px" height="auto" />
+  </div>
 
 ## Funcionalidades
 
