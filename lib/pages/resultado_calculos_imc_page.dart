@@ -75,75 +75,104 @@ class _ResultadoCalculosImcPageState extends State<ResultadoCalculosImcPage> {
                     ),
                     direction: DismissDirection.endToStart,
                     child: Card(
-                      color: Colors.blueAccent,
-                      margin: const EdgeInsets.all(10),
-                      elevation: 3,
-                      child: ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              imc.nome,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent,
+                        margin: const EdgeInsets.all(10),
+                        elevation: 3,
+                        child: ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                imc.nome,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            Icon(
-                              Icons.balance,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Wrap(
-                              spacing: 8.0, 
-                              children: [
-                                Text(
-                                  "Altura: ${imc.altura.toStringAsFixed(2)} m",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
+                              Icon(
+                                Icons.balance,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        "Altura: ${imc.altura.toStringAsFixed(2)} m",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 16, 
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Resultado IMC: ${imc.resultado.toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
+                                  SizedBox(width: 8),
+                                  Flexible(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        "Resultado IMC: ${imc.resultado.toStringAsFixed(2)}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16, 
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 5),
-                            Wrap(
-                              spacing: 8.0, 
-                              children: [
-                                Text(
-                                  "Peso: ${imc.peso.toStringAsFixed(2)} kg",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
+                                ],
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        "Peso: ${imc.peso.toStringAsFixed(2)} kg",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 16,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  imc.statusImc,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                  SizedBox(width: 8),
+                                  Flexible(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        imc.statusImc,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )),
                   ),
                 );
               },
