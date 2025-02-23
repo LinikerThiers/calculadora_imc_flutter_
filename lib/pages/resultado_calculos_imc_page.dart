@@ -78,74 +78,69 @@ class _ResultadoCalculosImcPageState extends State<ResultadoCalculosImcPage> {
                       color: Colors.blueAccent,
                       margin: const EdgeInsets.all(10),
                       elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ListTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                imc.nome,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Icon(
-                                Icons.balance,
+                      child: ListTile(
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              imc.nome,
+                              style: TextStyle(
                                 color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Altura: ${imc.altura.toStringAsFixed(2)} m",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w300,
-                                    ),
+                            ),
+                            Icon(
+                              Icons.balance,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Wrap(
+                              spacing: 8.0, 
+                              children: [
+                                Text(
+                                  "Altura: ${imc.altura.toStringAsFixed(2)} m",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
                                   ),
-                                  Text(
-                                    "Resultado IMC: ${imc.resultado.toStringAsFixed(2)}",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                ),
+                                Text(
+                                  "Resultado IMC: ${imc.resultado.toStringAsFixed(2)}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 5),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Peso: ${imc.peso.toStringAsFixed(2)} kg",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w300,
-                                    ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Wrap(
+                              spacing: 8.0, 
+                              children: [
+                                Text(
+                                  "Peso: ${imc.peso.toStringAsFixed(2)} kg",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w300,
                                   ),
-                                  Text(
-                                    imc.statusImc,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                ),
+                                Text(
+                                  imc.statusImc,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),

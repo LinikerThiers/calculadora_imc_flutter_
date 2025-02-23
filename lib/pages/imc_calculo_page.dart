@@ -135,7 +135,6 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
                   alignment: Alignment.center,
                   child: TextField(
                     controller: _nomeController,
-                    keyboardType: TextInputType.number,
                     onChanged: (value) {},
                     style: TextStyle(
                       color: Colors.blueAccent,
