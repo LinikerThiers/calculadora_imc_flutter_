@@ -305,6 +305,7 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
                       const Text(
                         "Resultado:",
                         style: TextStyle(
+                          color: Colors.black,
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -313,6 +314,7 @@ class _ImcCalculoPageState extends State<ImcCalculoPage> {
                       Text(
                         imcValor,
                         style: const TextStyle(
+                          color: Colors.black,
                           fontSize: 30,
                           fontWeight: FontWeight.w800,
                         ),
